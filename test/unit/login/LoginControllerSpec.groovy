@@ -1,5 +1,6 @@
 package Login
 
+import com.gapvak.athelete.controller.LoginController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

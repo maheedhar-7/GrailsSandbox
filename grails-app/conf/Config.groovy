@@ -60,7 +60,7 @@ grails {
 }
 
 
-grails.databinding.dateFormats = ['MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S','yyyy-MM-dd HH:mm', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
+grails.databinding.dateFormats = ['dd/MM/yyyy HH:mm']
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
@@ -117,3 +117,5 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails.gsp.enable.reload = true

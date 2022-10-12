@@ -1,5 +1,6 @@
 package activity
 
+import com.gapvak.athelete.controller.ActivityController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

@@ -1,5 +1,6 @@
 package login
 
+import com.gapvak.athlete.service.LoginService
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

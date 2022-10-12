@@ -6,6 +6,7 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+        "/"(controller: "login", action: "login")
         "/login"(controller: "login", action: "login")
         "/api/athletes"(controller: "athlete", action: "save", method: "POST")
         "/api/athletes"(controller: "athlete", action: "index", method: "GET")

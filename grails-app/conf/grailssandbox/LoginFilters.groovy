@@ -1,6 +1,6 @@
 package grailssandbox
 
-import login.LoginService
+import com.gapvak.athlete.service.LoginService
 
 class LoginFilters {
 
@@ -21,7 +21,15 @@ class LoginFilters {
 //                    render "Cant able to login because the is no id"
 //                }
 //                return authenticated
-                return true
+//                return true
+
+
+                if (session.getAttribute("login")) {
+                    return true
+                } else {
+                    redirect controller: "login", action: "login"
+                    return false
+                }
             }
         }
     }

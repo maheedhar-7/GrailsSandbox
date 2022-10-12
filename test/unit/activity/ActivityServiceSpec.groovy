@@ -1,5 +1,6 @@
 package activity
 
+import com.gapvak.athlete.service.ActivityService
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

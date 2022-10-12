@@ -1,5 +1,6 @@
 package grailssandbox
 
+import com.gapvak.athlete.domain.Athlete
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
