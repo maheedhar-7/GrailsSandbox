@@ -1,30 +1,3 @@
-
-%{--<header class="p-2 text-bg-dark">--}%
-%{--    <div class="container">--}%
-%{--        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">--}%
-%{--            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 p-1 justify-content-center mb-md-0">--}%
-%{--                <li>--}%
-%{--                    <g:link controller="athlete" class="text-decoration-none" action="getAthletes">--}%
-%{--                        <p class="px-2 text-white">Athletes</p>--}%
-%{--                    </g:link>--}%
-%{--                <li>--}%
-%{--                    <g:link controller="athlete" class="text-decoration-none" action="index">--}%
-%{--                        <p class="px-2 text-white">Activities</p>--}%
-%{--                    </g:link>--}%
-%{--                </li>--}%
-%{--            </ul>--}%
-
-%{--            <div class="text-end">--}%
-%{--                <g:link controller="login" action="logout">--}%
-%{--                    <button type="button" class="btn btn-danger me-2">Logout</button>--}%
-%{--                </g:link>--}%
-%{--            </div>--}%
-%{--        </div>--}%
-%{--    </div>--}%
-%{--</header>--}%
-
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
         <button
@@ -39,26 +12,33 @@
         <div class="navbar-brand collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-%{--                    <a class="nav-link active" aria-current="page" href="#">Home</a>--}%
-                    <g:link controller="athlete" class="nav-link" action="getAthletes">
-                        Athletes
+                    <g:link controller="athlete" class="nav-link ${ pageProperty(name: 'meta.nav').equals('home') ? 'active' : null}" action="index">
+                        <g:message code="label.home"/>
                     </g:link>
                 </li>
                 <li class="nav-item">
-%{--                    <a class="nav-link" href="#">Link</a>--}%
-                    <g:link controller="athlete" class="nav-link" action="index">
-                        Activities
+                    <g:link controller="athlete" class="nav-link ${ pageProperty(name: 'meta.nav').equals('athletes') ? 'active' : null}" action="list">
+                        <g:message code="label.athletes"/>
                     </g:link>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <g:message code="label.language" />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="?lang=en">English</a></li>
+                        <li><a class="dropdown-item" href="?lang=fr">Français</a></li>
+                        <li><a class="dropdown-item" href="?lang=de">German</a></li>
+                        <li><a class="dropdown-item" href="?lang=ja">日本語</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
-        <g:link controller="login" class="navbar-brand ms-auto" action="logout">
-            <button type="button" class="btn btn-danger me-2">Logout</button>
+        <g:link controller="login" class="navbar-brand ms-auto btn btn-danger me-2" action="logout">
+            <g:message code="label.logout"/>
         </g:link>
-%{--        <a class="navbar-brand ms-auto" href="#">--}%
-%{--            <img src="https://placeholder.pics/svg/150x50/888888/EEE/Logo" alt="..." height="36"/>--}%
-%{--        </a>--}%
+
     </div>
-</nav></nav>
+</nav>
 
 

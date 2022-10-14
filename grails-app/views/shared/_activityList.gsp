@@ -11,13 +11,13 @@
     <td>${activity.pace}</td>
     <td>
         <g:link controller="activity" class="text-decoration-none"
-                params="${[activityId: activity.id]}" action="update">
-            Update
+                params="${[activityId: activity.id]}" action="edit">
+            <g:message code="label.updateAction" />
         </g:link>
         <asset:javascript src="confirmation.js" />
             <g:link controller="activity" onclick="return getConfirmation()" class="text-decoration-none"
                     params="${[activityId: activity.id]}" action="delete">
-                Delete
+                <g:message code="label.deleteAction" />
             </g:link>
     </td>
 </tr>
