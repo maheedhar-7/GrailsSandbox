@@ -19,7 +19,7 @@ class ActivityService {
         activity.save(failOnError: true)
     }
 
-    def get(id){
+    def getActivityById(id){
         Activity.get(id)
     }
 

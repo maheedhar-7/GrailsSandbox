@@ -15,25 +15,27 @@
 
 <div class="col-md-12 col-sm-2">
     <div class="text-center">
-        <h2>${formTitle}</h2>
+        <h2>
+              ${g.message([code: activityCommand.id ? "label.updateActivity" : "label.addActivity"])}
+        </h2>
     </div>
 %{--    <g:renderErrors bean="${activity}"/>--}%
     <div class="container pt-3 col-md-4">
         <g:form action="save" method="POST">
             <div class="mb-4">
-                <g:hiddenField name="activity-id" typeof="text" id="activity-id" class="form-control"
-                               value="${activity?.id}">
+                <g:hiddenField name="id" typeof="text" id="activity-id" class="form-control"
+                               value="${activityCommand.id}">
                 </g:hiddenField>
                 <div class="mb-4 col-md-12 col-sm-2 dropdown">
                     <label htmlFor="activity" class=" form-label">
-                        Choose activity:
+                        <g:message code="label.chooseActivity" />:
                     </label>
                     <g:select
                             name="activity"
                             id="activity"
                             class="form-select "
-                            value="${activity?.activity}" from="${["Run", "Ride"]}"
-                            noSelection="['':'-Choose your activity-']">
+                            value="${activityCommand.activity}" from="${["Run", "Ride"]}"
+                            noSelection="['':g.message(code: 'label.chooseYourActivity')]">
                         <option>-- select an option --</option>
                         <option value="Ride">Ride</option>
                         <option value="Run">Run</option>
@@ -42,16 +44,15 @@
 
                 <div class="mb-4">
                     <label for="startDate" class="form-label">
-                        Start date:
+                        <g:message code="label.startDate" />
                     </label>
                     <g:textField name="startDate" id="startDate"
-                                 class="form-control ${hasErrors(bean: activity, field: "startDate", "is-invalid")}"
-                                 value="${formatDate(format: 'dd/MM/yyyy HH:mm', date: activity?.startDate)}">
+                                 class="form-control ${hasErrors(bean: activityCommand, field: "startDate", "is-invalid")}"
+                                 value="${formatDate(format: 'dd/MM/yyyy HH:mm', date: activityCommand.startDate)}">
                     </g:textField>
-                    <g:hasErrors bean="${activity}" field="startDate">
+                    <g:hasErrors bean="${activityCommand}" field="startDate">
                         <div id="val_feedback_name" class="invalid-feedback">
-                            <g:eachError bean="${activity}" field="startDate" var="error">
-                                <g:set var="error" value="Start Date can not be null" />
+                            <g:eachError bean="${activityCommand}" field="startDate" var="error">
                                 <g:message error="${error}"/>
                             </g:eachError>
                         </div>
@@ -60,17 +61,16 @@
 
                 <div class="mb-4">
                     <label for="endDate" class="form-label">
-                        End date:
+                        <g:message code="label.endDate"/>
                     </label>
-                    <g:textField value="${formatDate(format: 'dd/MM/yyyy HH:mm', date: activity?.startDate)}"
+                    <g:textField value="${formatDate(format: 'dd/MM/yyyy HH:mm', date: activityCommand.startDate)}"
                                  name="endDate" type="date/time"
                                  id="endDate"
-                                 class="form-control ${hasErrors(bean: activity, field: "endDate", "is-invalid")}">
+                                 class="form-control ${hasErrors(bean: activityCommand, field: "endDate", "is-invalid")}">
                     </g:textField>
-                    <g:hasErrors bean="${activity}" field="endDate">
+                    <g:hasErrors bean="${activityCommand}" field="endDate">
                         <div id="val_feedback_name" class="invalid-feedback">
-                            <g:eachError bean="${activity}" field="endDate" var="error">
-                                <g:set var="error" value="EndDate can not be null" />
+                            <g:eachError bean="${activityCommand}" field="endDate" var="error">
                                 <g:message error="${error}"/>
                             </g:eachError>
                         </div>
@@ -80,17 +80,16 @@
 
             <div class="mb-4">
                 <label for="pace" class="form-label">
-                    Pace:
+                    <g:message code="label.pace"/>
                 </label>
-                <g:textField value="${activity?.pace}"
+                <g:textField value="${activityCommand.pace}"
                              name="pace" typeof="text"
                              id="pace"
-                             class="form-control ${hasErrors(bean: activity, field: "pace", "is-invalid")}">
+                             class="form-control ${hasErrors(bean: activityCommand, field: "pace", "is-invalid")}">
                 </g:textField>
-                <g:hasErrors bean="${activity}" field="pace">
+                <g:hasErrors bean="${activityCommand}" field="pace">
                     <div id="val_feedback_name" class="invalid-feedback">
-                        <g:eachError bean="${activity}" field="pace" var="error">
-                            <g:set var="error" value="pace can not be null" />
+                        <g:eachError bean="${activityCommand}" field="pace" var="error">
                             <g:message error="${error}"/>
                         </g:eachError>
                     </div>
@@ -98,16 +97,15 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-block w-70">
-                        ${formTitle}
+                    <button type="submit" class="btn btn-primary btn-block w-50">
+                        ${g.message([code: activityCommand.id ? "label.updateActivity" : "label.addActivity"])}
                     </button>
                 </div>
 
 
                 <div class="col">
                     <g:link controller="athlete" action="index" class="btn btn-primary btn-block w-50 bg-danger float-end">
-
-                        Cancel
+                        <g:message code="label.cancel"/>
                     </g:link>
                 </div>
             </div>

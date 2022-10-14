@@ -1,4 +1,5 @@
 function getConfirmation() {
+
     var message = confirm("Are you sure you want to delete ?");
     if (message == true) {
         console.log("Activity deleted")
@@ -13,6 +14,7 @@ function getConfirmation() {
 
 
 function getConfirmationAthleteDelete() {
+    console.log("coming to conformation athlete")
     var message = confirm("Are you sure you want to delete ?");
     if (message == true) {
         return true;

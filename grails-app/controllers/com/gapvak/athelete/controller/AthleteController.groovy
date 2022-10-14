@@ -8,13 +8,9 @@ class AthleteController {
 
     AthleteService athleteService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", show: "GET"]
+//    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", show: "GET"]
 
     def index() {
-//        if (session.getAttribute("login") == null) {
-//            render view: "/login/index"
-//            return true
-//        }
         Login login = session.login
         Athlete athlete = athleteService.getAthleteById(login.athlete.id)
         def activities = athlete.getActivities()
@@ -24,10 +20,11 @@ class AthleteController {
         ]
     }
 
-    def getAthletes() {
+    def list() {
         List<Athlete> athletes = athleteService.list()
-        render view: "/athlete/athletelist", model: [
-                athletes: athletes
+        render view: "/athlete/list", model: [
+                athletes: athletes,
+                msg: params.get("message")
         ]
     }
 
@@ -61,7 +58,7 @@ class AthleteController {
         // duplicate check
         def existingAthlete = Athlete.findAllByEmail(athleteCommand.email)
         println "====Existing Athlete ${existingAthlete}"
-        if(existingAthlete.size() > 1 || (existingAthlete.size() == 1 && existingAthlete.id != athleteCommand.id)) {
+        if(existingAthlete.size() > 1 || (existingAthlete.size() == 1 && existingAthlete.get(0).id != athleteCommand.id)) {
             println "Rejecting the Email----"
             // reject the email field
             athleteCommand.errors.rejectValue('email', "duplicate")
@@ -82,47 +79,33 @@ class AthleteController {
         athlete.firstName = athleteCommand.firstName
         athlete.lastName = athleteCommand.lastName
         athlete.phoneNumber = athleteCommand.phoneNumber
+        athlete.email = athleteCommand.email
         athlete.password = athleteCommand.password
         athleteService.save(athlete)
-        redirect controller: "athlete", action: "getAthletes"
+        redirect controller: "athlete", action: "list"
     }
 
-    def deleteAthlete() {
+    def delete() {
         List<Athlete> athletes = athleteService.list()
-        def id = params.getLong("athleteId")
+        def id = params.long('id')
+        println "id in delete is ${id}"
         println "athleteid in session is ......... ${session.login.athlete.id}"
         println "params in athlete delete is ${params}"
         println "id in delete is ${id}"
         if (session.login.athlete.id == id) {
-            render view: "/athlete/athletelist", model: [
-                    athletes: athletes,
-                    msg: "Cannot delete the user with the current session"
-            ]
-            println "to see wether the smt execute"
-            return false
+//            render view: "/athlete/list", model: [
+//                    athletes: athletes,
+//                    msg: "Cannot delete the user with the current session"
+//            ]
+//            println "to see wether the smt execute"
+//            return false
+//            redirect action: "list"
+            forward action: "list", params: [message: "Cant' delete Athlete with current session"]
+            return
         }
         athleteService.delete(id)
-        redirect controller: "athlete", action: "getAthletes"
+        redirect controller: "athlete", action: "list"
     }
 
-    def pageView() {
-        render view: "/athlete/form", model: [
-                formTitle: "Add Athlete"
-        ]
-    }
-
-    def updateAthlete() {
-        print "Coming to the update in athlete controller----------"
-
-        def id = params.getLong("athleteId")
-        def athlete = athleteService.getAthleteById(id)
-        print "athlete in athCon update is ${athlete as grails.converters.JSON}"
-        render view: "/athlete/form", model: [
-                athlete: athlete,
-//                athleteCommand: athleteCommand,
-                formTitle: "Update Athlete",
-                id: id
-        ]
-    }
 
 }
