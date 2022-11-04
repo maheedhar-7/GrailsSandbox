@@ -14,6 +14,17 @@ class AthleteController {
         Login login = session.login
         Athlete athlete = athleteService.getAthleteById(login.athlete.id)
         def activities = athlete.getActivities()
+        if(request.getAttribute("jsonObj")) {
+        println "request obj in index after forward is ${request.getAttribute("jsonObj")}"
+            def tokens = request.getParameter("jsonObj")
+            println "token 1 is ${tokens.getClass()} ${params.toString()}"
+            AthleteCommand athleteCommand = new AthleteCommand()
+            athleteCommand.accessToken = params.access_token
+            athleteCommand.refreshToken = params.refreshToken
+            athlete.refreshToken = athleteCommand.refreshToken
+            athlete.accessToken = athleteCommand.accessToken
+            athleteService.save(athlete)
+        }
         render view: "/athlete/index", model: [
             activities: activities,
             login: login

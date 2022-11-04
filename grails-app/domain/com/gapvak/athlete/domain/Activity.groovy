@@ -25,6 +25,7 @@ class Activity {
     static belongsTo = [athlete: Athlete]
 
     static constraints = {
+        activity nullable: false
         pace nullable: false
         startDate nullable: false, matches: "^\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}[AP]M\$\n"
         endDate nullable: false, matches: "^\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}[AP]M\$\n"

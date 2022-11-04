@@ -50,6 +50,18 @@
                 <g:message code="label.activities" />
             </h2>
         </div>
+
+        <div>
+            <div class="row">
+                <div class="col">
+                    <g:link controller="oauth" class="btn btn-warning btn-block w-70" onclick="" action="authorization">
+%{--                        <g:message code="label.addActivity"/>--}%
+                        Authorise Strava
+                    </g:link>
+                </div>
+            </div>
+        </div>
+
         <div>
             <div class="row">
                 <div class="col">

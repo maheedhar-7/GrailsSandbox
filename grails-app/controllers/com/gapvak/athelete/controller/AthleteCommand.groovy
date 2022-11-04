@@ -12,6 +12,8 @@ class AthleteCommand {
     String phoneNumber
     String password
     String passwordConfirm
+    String accessToken
+    String refreshToken
 
     static constraints = {
         id nullable: true

@@ -10,6 +10,8 @@ class Athlete {
     String email
     String phoneNumber
     String password
+    String accessToken
+    String refreshToken
 
 
     static hasMany = [activities: Activity]
@@ -31,6 +33,8 @@ class Athlete {
         this.lastName = athleteCommand.lastName
         this.email = athleteCommand.email
         this.password = athleteCommand.password
+        this.accessToken = athleteCommand.accessToken
+        this.refreshToken = athleteCommand.refreshToken
     }
 
 

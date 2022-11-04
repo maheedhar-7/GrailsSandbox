@@ -13,21 +13,16 @@
         </div>
 
 
-        <g:eachError bean="${athleteCommand}"  var="error">
-             ${error}
-        </g:eachError>
-
         <div class="container pt-3 col-md-4">
             <g:form action="save" method="POST">
-                <div class="mb-4">
-                    <g:hiddenField name="id" typeof="text" id="activity-id" class="form-control"
-                                   value="${athleteCommand.id}">
-                    </g:hiddenField>
-                </div>
+%{--                <div class="mb-4">--}%
+%{--                    <g:hiddenField name="id" typeof="text" id="activity-id" class="form-control"--}%
+%{--                                   value="${athleteCommand.id}">--}%
+%{--                    </g:hiddenField>--}%
+%{--                </div>--}%
 
-                <div class="row">
-%{--                    <div class="col mb-4">--}%
-                        <div class="mb-4 col-md-auto col-12">
+                <div class="row mb-4">
+                    <div class="col-md-6 col-sm-12 mb-4">
                         <label htmlFor="firstName" class="form-label">
                             <g:message code="label.firstName" />:
                         </label>
@@ -44,8 +39,7 @@
                         </g:hasErrors>
                     </div>
 
-%{--                    <div class="mb-4 col">--}%
-                        <div class="mb-4 col-md-auto offset-md-1 col-12">
+                    <div class="col-md-6 col-sm-12 mb-4">
                         <label htmlFor="lastName" class="form-label">
                             <g:message code="label.lastName" />:
                         </label>
@@ -135,10 +129,15 @@
                     </g:hasErrors>
                 </div>
 
+                <div class="mb-4">
+                    <g:hiddenField name="id" typeof="text" id="activity-id" class="form-control"
+                                   value="${athleteCommand.id}">
+                    </g:hiddenField>
+                </div>
 
                 <div class="row">
                     <div class="col">
-                        <button type="submit" class="btn btn-primary btn-block w-70">
+                        <button type="submit" class="btn btn-primary btn-block">
                             ${g.message([code: athleteCommand.id ? "label.updateActivity" : "label.addActivity"])}
                         </button>
                     </div>
@@ -148,7 +147,6 @@
                             <g:message code="label.cancel" />
                         </g:link>
                     </div>
-
                 </div>
             </g:form>
         </div>

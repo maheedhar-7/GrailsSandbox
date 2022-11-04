@@ -24,3 +24,7 @@ function getConfirmationAthleteDelete() {
     }
 
 }
+
+function getCodeFromAuthorization() {
+
+}
