@@ -9,6 +9,7 @@ class Activity {
     Date endDate
     String pace
     String activity
+    String externalId
 //    Athlete athlete
 
     Activity() {
@@ -20,6 +21,7 @@ class Activity {
         this.endDate = activityCommand.endDate
         this.pace = activityCommand.pace
         this.activity = activityCommand.activity
+        this.externalId = activityCommand.externalId
     }
 
     static belongsTo = [athlete: Athlete]

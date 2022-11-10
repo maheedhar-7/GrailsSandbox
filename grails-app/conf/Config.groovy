@@ -124,15 +124,23 @@ grails.gsp.enable.reload = true
 oauth {
     providers {
         strava {
-            api = StravaApi
             client_id = '96448'
             client_secret = '353ce9a76456daf6b8afbd7e1d4e28ccf76e029f'
             scope = 'activity:read_all'
+            authorizationUrl = 'https://www.strava.com/oauth/authorize'
+            endpoint = 'https://www.strava.com/api/v3'
+            tokenUrl = 'https://www.strava.com/oauth/token'
+            callbackUrl = 'http://localhost:8080/GrailsSandbox/Oauth/callback'
+/*
 
             authorizationCodeUrl = 'https://www.strava.com/oauth/authorize?client_id=96448&redirect_uri=http://localhost:8080/GrailsSandbox/Oauth/checkAuthGetToken&response_type=code&\n' +
                     'approval_prompt=auto&scope=activity:read_all'
+            userLoginAuthorizationCodeUrl =
             callBackUrl = 'http://localhost:8080/GrailsSandbox/athlete/index'
             tokenUrl = 'https://www.strava.com/oauth/token'
+            athlete_api = 'https://www.strava.com/api/v3/athlete'
+            activity_api = 'https://www.strava.com/api/v3/athlete/activities'
+*/
         }
     }
 }

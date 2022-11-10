@@ -19,10 +19,12 @@ class LoginController {
         println "Authenticating User ${email}:${password}"
         Login login = loginService.login(email, password)
         println "Authentication Result ${login}"
+        println "session.get login attr ${session.getAttribute("login")} ${session as grails.converters.JSON}"
         if(login != null) {
             session.login = login
 //            def cookieService = cook
             println "in login is ${session.login as grails.converters.JSON}"
+            println "session.get login attr ${session.getAttribute("login") as grails.converters.JSON} ${session as grails.converters.JSON}"
             redirect controller: 'athlete', action: 'index'
         }
         else {

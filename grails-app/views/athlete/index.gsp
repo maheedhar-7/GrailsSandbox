@@ -33,10 +33,10 @@
         </thead>
         <tbody>
         <tr>
-            <td>${login.athlete.firstName}</td>
-            <td>${login.athlete.lastName}</td>
-            <td>${login.athlete.email}</td>
-            <td>${login.athlete.phoneNumber}</td>
+            <td>${athlete.firstName}</td>
+            <td>${athlete.lastName}</td>
+            <td>${athlete.email}</td>
+            <td>${athlete.phoneNumber}</td>
         </tr>
         </tbody>
     </table>
@@ -51,16 +51,16 @@
             </h2>
         </div>
 
-        <div>
-            <div class="row">
-                <div class="col">
-                    <g:link controller="oauth" class="btn btn-warning btn-block w-70" onclick="" action="authorization">
+%{--        <div>--}%
+%{--            <div class="row">--}%
+%{--                <div class="col">--}%
+%{--                    <g:link controller="oauth" class="btn btn-warning btn-block w-70" onclick="" action="authorization">--}%
 %{--                        <g:message code="label.addActivity"/>--}%
-                        Authorise Strava
-                    </g:link>
-                </div>
-            </div>
-        </div>
+%{--                        Authorise Strava--}%
+%{--                    </g:link>--}%
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </div>--}%
 
         <div>
             <div class="row">

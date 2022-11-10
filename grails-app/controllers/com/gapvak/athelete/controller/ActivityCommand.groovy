@@ -16,6 +16,7 @@ class ActivityCommand {
     Date startDate
 //    @BindingFormat('dd/MM/yyyy HH:mm:ss')
     Date endDate
+    String externalId
 
     final static DateFormat DATEFORMAT = new SimpleDateFormat('dd/MM/yyyy HH:mm')
 

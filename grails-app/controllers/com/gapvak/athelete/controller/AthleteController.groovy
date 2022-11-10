@@ -11,23 +11,26 @@ class AthleteController {
 //    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", show: "GET"]
 
     def index() {
-        Login login = session.login
-        Athlete athlete = athleteService.getAthleteById(login.athlete.id)
+//        Login login = session.login
+        println "session athlete id in athlete controller index is ${Athlete.get(session.athlete.id)} ${session.athlete as grails.converters.JSON}"
+        Athlete athlete = athleteService.getAthleteById(session.athlete.id)
         def activities = athlete.getActivities()
-        if(request.getAttribute("jsonObj")) {
-        println "request obj in index after forward is ${request.getAttribute("jsonObj")}"
-            def tokens = request.getParameter("jsonObj")
-            println "token 1 is ${tokens.getClass()} ${params.toString()}"
-            AthleteCommand athleteCommand = new AthleteCommand()
-            athleteCommand.accessToken = params.access_token
-            athleteCommand.refreshToken = params.refreshToken
-            athlete.refreshToken = athleteCommand.refreshToken
-            athlete.accessToken = athleteCommand.accessToken
-            athleteService.save(athlete)
-        }
+//        if(request.getAttribute("jsonObj")) {
+//        println "request obj in index after forward is ${request.getAttribute("jsonObj")}"
+//            def tokens = request.getParameter("jsonObj")
+//            println "token 1 is ${tokens.getClass()} ${params.toString()}"
+//            AthleteCommand athleteCommand = new AthleteCommand()
+//            athleteCommand.accessToken = params.access_token
+//            println "athlete command is ${athleteCommand.accessToken}"
+//            println "athlete command is ${athleteCommand.refreshToken}"
+//            athleteCommand.refreshToken = params.refreshToken
+//            athlete.refreshToken = athleteCommand.refreshToken
+//            athlete.accessToken = athleteCommand.accessToken
+//            athleteService.save(athlete)
+//        }
         render view: "/athlete/index", model: [
             activities: activities,
-            login: login
+            athlete: athlete
         ]
     }
 

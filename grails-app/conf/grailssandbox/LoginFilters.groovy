@@ -24,7 +24,7 @@ class LoginFilters {
 //                return true
 
 
-                if (session.getAttribute("login")) {
+                if (session.getAttribute("login") == null) {
                     return true
                 } else {
                     redirect controller: "login", action: "login"
