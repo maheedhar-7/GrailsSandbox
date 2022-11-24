@@ -4,10 +4,17 @@ import groovyx.net.http.HTTPBuilder
 
 class StravaCalls extends Thread {
 
+    def athleteService
 
+    StravaCalls(athleteService) {
+        this.athleteService = athleteService
+    }
 
     public void run() {
-        def http = new HTTPBuilder("https://www.strava.com/api/v3/athlete/activities");
-
+        while (true) {
+            println "this is in the stravacalls class run"
+            athleteService.syncAthleteAndActivities();
+            Thread.sleep(180000)
+        }
     }
 }

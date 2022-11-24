@@ -11,7 +11,7 @@ class AthleteService {
 
     LoginService loginService
     ActivityService activityService
-//    AthleteService stravaCallT1 = new AthleteService();
+
 
     Map<Long, Athlete> database = [:]
     long idGenerator = 0
@@ -39,31 +39,38 @@ class AthleteService {
         Athlete.get(id).delete()
     }
 
-    Athlete syncActivities(athlete) {
+    def getAllAthletes() {
+        Athlete.list()
+    }
 
-
-        def http = new HTTPBuilder("https://www.strava.com/api/v3/athlete/activities");
-        println "athlete id is ${athlete.id}"
-        def activityList
-        http.request(Method.GET) {
-            uri.query = [per_page: 10, before: 1667557489]
-            headers.Authorization = "Bearer ${athlete.accessToken}"
-            response.success = { resp, json ->
-//                println "Get response status: ${resp.statusLine}"
-                println "json in the syncactivities is ${json}"
-                activityList = json
+    Athlete syncAthleteAndActivities() {
+        List<Athlete> athletes = getAllAthletes();
+        for (athlete in athletes) {
+            println "each Athlete in sync Athlete and Activites is ${athlete as grails.converters.JSON}"
+            def http = new HTTPBuilder("https://www.strava.com/api/v3/athlete/activities");
+//            athleteObj = athlete
+            println "athlete id is ${athlete.id}"
+            def activityList
+            http.request(Method.GET) {
+                uri.query = [per_page: 10, before: 1667557489]
+                headers.Authorization = "Bearer ${athlete.accessToken}"
+                response.success = { resp, json ->
+    //                println "Get response status: ${resp.statusLine}"
+                    println "json in the syncactivities is ${json}"
+                    activityList = json
+                }
             }
-        }
-        for (item in activityList) {
-            Activity activity = new Activity();
-            if (activityService.checkIfAlreadyPresent(item.id) != true) {
-                activity.activity = item.type
-                activity.startDate = activityService.startDateConverter(item.start_date_local)
-                activity.endDate = activityService.endDateConverter(item.start_date_local, item.moving_time)
-                activity.pace = item.average_speed
-                activity.externalId = item.id
-                activity.athlete = Athlete.get(athlete.id)
-                activity.save()
+            for (item in activityList) {
+                Activity activity = new Activity();
+                if (activityService.checkIfAlreadyPresent(item.id) != true) {
+                    activity.activity = item.type
+                    activity.startDate = activityService.startDateConverter(item.start_date_local)
+                    activity.endDate = activityService.endDateConverter(item.start_date_local, item.moving_time)
+                    activity.pace = item.average_speed
+                    activity.externalId = item.id
+                    activity.athlete = Athlete.get(athlete.id)
+                    activity.save()
+                }
             }
         }
     }
@@ -95,4 +102,6 @@ class AthleteService {
         existingAthlete.setEmail(athlete.getEmail())
         save(athlete)
     }
+
+
 }

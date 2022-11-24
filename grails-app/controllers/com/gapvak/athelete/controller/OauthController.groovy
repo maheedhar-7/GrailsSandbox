@@ -17,6 +17,7 @@ class OauthController {
     ActivityService activityService
 
     def authorize() {
+        log.info("the logger statement in the authorize")
     def stravaConfig =  grailsApplication.config.oauth.providers.strava
 //        session.authorize = true
         String authorizationUrl = stravaConfig.authorizationUrl
@@ -81,7 +82,7 @@ class OauthController {
 //
 //
 //        // sync the activities from the strava to the app.
-        athleteService.syncActivities(athlete)
+        athleteService.syncAthleteAndActivities()
 //
 //        // redirect to the index page.
         redirect controller: "athlete", action: "index"
